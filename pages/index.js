@@ -9,9 +9,7 @@ const Box = ({ text, classes }) => (
       classes
     )}
   >
-    <span className="text-[100px] text-white drop-shadow-md">
-      {text}
-    </span>
+    <span className="text-[100px] text-white drop-shadow-md">{text}</span>
   </div>
 );
 
@@ -23,11 +21,11 @@ export default function Home() {
       </Head>
       <main>
         <div className="container mx-auto p-2">
-          <div className="grid lg:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-4 grid-">
             {[
-              ["1", "bg-[#dce0d9] lg:col-span-2"],
+              ["3", "bg-[#dce0d9] md:col-span-2 md:order-last"],
               ["2", "bg-[#fbf6ef]"],
-              ["3", "bg-[#ead7c3]"],
+              ["1", "bg-[#ead7c3] md:order-first"],
             ].map(([text, classes]) => (
               <Box {...{ text, classes }} />
             ))}
