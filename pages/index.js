@@ -21,13 +21,13 @@ export default function Home() {
       </Head>
       <main>
         <div className="container mx-auto p-2">
-          <div className="grid md:grid-cols-2 gap-4 grid-">
+          <div className=" grid gap-4 md:grid-cols-2">
             {[
               ["3", "bg-[#dce0d9] md:col-span-2 md:order-last"],
               ["2", "bg-[#fbf6ef]"],
               ["1", "bg-[#ead7c3] md:order-first"],
             ].map(([text, classes]) => (
-              <Box {...{ text, classes }} />
+              <Box key={text} {...{ text, classes }} />
             ))}
           </div>
         </div>

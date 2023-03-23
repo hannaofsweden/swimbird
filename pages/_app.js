@@ -25,18 +25,23 @@ export default function App({ Component, pageProps }) {
   return (
     <div className="container mx-auto">
       <div className="grid grid-cols-2 pb-4">
-        <Image src={logo.src} height={logo.height} width={logo.width} />
-        <div className="md:text-2xl text-lg uppercase tracking-wide grid place-content-center">
+        <Image
+          src={logo.src}
+          height={logo.height}
+          width={logo.width}
+          alt="Logo"
+        />
+        <div className="text-lg uppercase tracking-wide grid place-content-center md:text-2xl">
           Frontend task
         </div>
       </div>
 
       <div className="grid grid-cols-2">
         {[
-          ["Page 1", "/"],
-          ["Page 2", "/page2"],
+          ["1. Layout", "/"],
+          ["2. Tables", "/page2"],
         ].map(([displayName, href]) => (
-          <Link href={href}>
+          <Link key={href} href={href}>
             <div className={tabColor(href)}>{displayName}</div>
           </Link>
         ))}

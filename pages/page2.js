@@ -52,7 +52,7 @@ export default function Page2() {
     return orderBy(data, sortColumn, sortOrder);
   }, [data, sortColumn, sortOrder]);
 
-  const handleClickLoadButton = () => {
+  const handleLoadButtonClick = () => {
     mutate();
   };
 
@@ -78,13 +78,13 @@ export default function Page2() {
       </Head>
       <main>
         <div className="container mx-auto p-2">
-          <div className="text-center md:text-right p-4">
+          <div className="md:text-right p-4">
             <button
               className={classNames(
-                isLoading || isValidating ? "bg-gray-300" : "bg-emerald-400",
-                "rounded-xl py-3 px-4 text-md text-white w-[200px]"
+                isValidating ? "bg-gray-300" : "bg-emerald-400",
+                "rounded-xl text-left py-3 pl-5 text-md text-white w-[155px] whitespace-nowrap"
               )}
-              onClick={handleClickLoadButton}
+              onClick={handleLoadButtonClick}
             >
               <ReloadOutlined
                 className={classNames(
@@ -92,16 +92,19 @@ export default function Page2() {
                   (isLoading || isValidating) && "animate-spin"
                 )}
               />
-              {isLoading || isValidating ? "Loading..." : "Reload data"}
+              {isValidating ? "Loading..." : "Reload data"}
             </button>
           </div>
           {sortedData && (
             <div>
-              {/*Mobile: list*/}
+              {/* Mobile: list */}
               <div className="md:hidden">
-                <div className="text-2xl pb-4 text-center">Accounts</div>
+                <div className="text-2xl pb-4 text-center">Your accounts</div>
                 {data.map((row) => (
-                  <div className="border rounded-lg border-gray-400 p-4 mb-4 flex justify-between">
+                  <div
+                    key={row.id}
+                    className="border rounded-lg border-gray-400 p-4 mb-4 flex justify-between"
+                  >
                     <span>
                       {row.accountId} in {row.bank}
                     </span>
@@ -112,7 +115,7 @@ export default function Page2() {
                 ))}
               </div>
 
-              {/*Desktop: table*/}
+              {/* Desktop: table */}
               <table className="hidden md:table w-full shadow-sm">
                 <thead>
                   {columns.map((col) => (
@@ -135,20 +138,22 @@ export default function Page2() {
                     </th>
                   ))}
                 </thead>
-                {sortedData.map((row, rowIndex) => (
-                  <>
-                    <tr>
-                      {columns.map((col) => (
-                        <td
-                          className="text-right border p-2 border-grey-400"
-                          key={col.id}
-                        >
-                          {row[col.name]}
-                        </td>
-                      ))}
-                    </tr>
-                  </>
-                ))}
+                <tbody>
+                  {sortedData.map((row, rowIndex) => (
+                    <>
+                      <tr>
+                        {columns.map((col) => (
+                          <td
+                            className="text-right border p-2 border-grey-400"
+                            key={col.id}
+                          >
+                            {row[col.name]}
+                          </td>
+                        ))}
+                      </tr>
+                    </>
+                  ))}
+                </tbody>
               </table>
             </div>
           )}
