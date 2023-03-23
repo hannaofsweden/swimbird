@@ -73,7 +73,7 @@ export default function Page2() {
     <button
       className={classNames(
         isValidating ? "bg-gray-300" : "bg-emerald-400",
-        "rounded-xl text-md pl-3 py-3 text-md text-white w-[155px] whitespace-nowrap"
+        "rounded-xl text-md text-left pl-5 py-3 text-md text-white w-[155px] whitespace-nowrap"
       )}
       onClick={handleLoadloadButtonClick}
     >
@@ -100,17 +100,17 @@ export default function Page2() {
             <div>
               {/* Mobile: list */}
               <div className="md:hidden">
-                <div className="pb-4 flex justify-between items-center">
+                <div className="pb-2 flex justify-between items-center">
                   <span className="text-2xl">Your accounts</span>
                   {loadButton}
                 </div>
                 {data.map((row) => (
                   <div
                     key={row.id}
-                    className="border rounded-lg border-gray-400 p-4 mb-4"
+                    className="border rounded-lg border-gray-400 p-4 mb-4 flex justify-between items-baseline"
                   >
-                    <span>
-                      {row.accountId} in {row.bank}
+                    <span className="text-lg font-medium">
+                      {row.accountId} ({row.bank})
                     </span>
                     <span>
                       {row.balance} {row.currency}
@@ -120,12 +120,12 @@ export default function Page2() {
               </div>
 
               {/* Desktop: table */}
-              <div>
-                <div className="pb-4 flex justify-between items-center">
+              <div className="hidden md:block">
+                <div className="pb-2 flex justify-between items-center">
                   <span className="text-2xl">Your accounts</span>
                   {loadButton}
                 </div>
-                <table className="hidden md:table w-full shadow-sm">
+                <table className="w-full shadow-sm">
                   <thead>
                     {columns.map((col) => (
                       <th
