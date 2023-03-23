@@ -49,8 +49,24 @@ export default function App({ Component, pageProps }) {
       <div className="border border-gray-200">
         <Component {...pageProps} />
       </div>
-      <div className="pt-8 text-gray-400 text-center mb-20">
-        By Johanna Johansson
+      <div className="pt-8 text-gray-300 text-center mb-20">
+        By{" "}
+        <Link
+          alt="Repo"
+          className="text-gray-400"
+          href="https://www.linkedin.com/in/hannaofsweden/"
+        >
+          Johanna Johansson
+        </Link>
+        {". See the "}
+        <Link
+          alt="Repo"
+          className="text-gray-400"
+          href="https://github.com/hannaofsweden/swimbird"
+        >
+          Github repo
+        </Link>
+        {" here"}
       </div>
     </div>
   );
