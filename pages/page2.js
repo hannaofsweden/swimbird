@@ -42,7 +42,7 @@ export default function Page2() {
   const [sortColumn, setSortColumn] = useState("id");
   const [sortOrder, setSortOrder] = useState("asc");
 
-  const { data, error, isLoading, isValidating, mutate } = useSWR(
+  const { data, error, isValidating, mutate } = useSWR(
     "https://private-9b37c2-wlb.apiary-mock.com/accounts?ccy=SEK",
     fetcher
   );
@@ -52,7 +52,7 @@ export default function Page2() {
     return orderBy(data, sortColumn, sortOrder);
   }, [data, sortColumn, sortOrder]);
 
-  const handleLoadButtonClick = () => {
+  const handleLoadloadButtonClick = () => {
     mutate();
   };
 
@@ -69,6 +69,24 @@ export default function Page2() {
     }
   };
 
+  const loadButton = (
+    <button
+      className={classNames(
+        isValidating ? "bg-gray-300" : "bg-emerald-400",
+        "rounded-xl text-md pl-3 py-3 text-md text-white w-[155px] whitespace-nowrap"
+      )}
+      onClick={handleLoadloadButtonClick}
+    >
+      <ReloadOutlined
+        className={classNames(
+          "relative -top-1 mr-2",
+          isValidating && "animate-spin"
+        )}
+      />
+      {isValidating ? "Loading..." : "Reload data"}
+    </button>
+  );
+
   if (error) return "An error occurred when retrieving table data.";
 
   return (
@@ -78,32 +96,18 @@ export default function Page2() {
       </Head>
       <main>
         <div className="container mx-auto p-2">
-          <div className="md:text-right p-4">
-            <button
-              className={classNames(
-                isValidating ? "bg-gray-300" : "bg-emerald-400",
-                "rounded-xl text-left py-3 pl-5 text-md text-white w-[155px] whitespace-nowrap"
-              )}
-              onClick={handleLoadButtonClick}
-            >
-              <ReloadOutlined
-                className={classNames(
-                  "relative -top-1 mr-2",
-                  (isLoading || isValidating) && "animate-spin"
-                )}
-              />
-              {isValidating ? "Loading..." : "Reload data"}
-            </button>
-          </div>
           {sortedData && (
             <div>
               {/* Mobile: list */}
               <div className="md:hidden">
-                <div className="text-2xl pb-4 text-center">Your accounts</div>
+                <div className="pb-4 flex justify-between items-center">
+                  <span className="text-2xl">Your accounts</span>
+                  {loadButton}
+                </div>
                 {data.map((row) => (
                   <div
                     key={row.id}
-                    className="border rounded-lg border-gray-400 p-4 mb-4 flex justify-between"
+                    className="border rounded-lg border-gray-400 p-4 mb-4"
                   >
                     <span>
                       {row.accountId} in {row.bank}
@@ -116,45 +120,50 @@ export default function Page2() {
               </div>
 
               {/* Desktop: table */}
-              <table className="hidden md:table w-full shadow-sm">
-                <thead>
-                  {columns.map((col) => (
-                    <th
-                      key={col.id}
-                      className="border border-gray-300 bg-gray-100 p-2 cursor-pointer"
-                      onClick={handleColumnClick(col.name)}
-                    >
-                      <div className="flex items-top select-none">
-                        <span className="mr-1">{col.displayName}</span>
-                        <span className="w-4 relative -top-1">
-                          {sortColumn === col.name && sortOrder === "asc" && (
-                            <CaretDownOutlined />
-                          )}
-                          {sortColumn === col.name && sortOrder === "desc" && (
-                            <CaretUpOutlined />
-                          )}
-                        </span>
-                      </div>
-                    </th>
-                  ))}
-                </thead>
-                <tbody>
-                  {sortedData.map((row, rowIndex) => (
-                    <>
-                      <tr>
-                        {columns.map((col) => (
-                          <td
-                            className="text-right border p-2 border-grey-400"
-                            key={col.id}
-                          >
-                            {row[col.name]}
-                          </td>
-                        ))}
-                      </tr>
-                    </>
-                  ))}
-                </tbody>
-              </table>
+              <div>
+                <div className="pb-4 flex justify-between items-center">
+                  <span className="text-2xl">Your accounts</span>
+                  {loadButton}
+                </div>
+                <table className="hidden md:table w-full shadow-sm">
+                  <thead>
+                    {columns.map((col) => (
+                      <th
+                        key={col.id}
+                        className="border border-gray-300 bg-gray-100 p-2 cursor-pointer"
+                        onClick={handleColumnClick(col.name)}
+                      >
+                        <div className="flex items-top select-none">
+                          <span className="mr-1">{col.displayName}</span>
+                          <span className="w-4 relative -top-1">
+                            {sortColumn === col.name && sortOrder === "asc" && (
+                              <CaretDownOutlined />
+                            )}
+                            {sortColumn === col.name &&
+                              sortOrder === "desc" && <CaretUpOutlined />}
+                          </span>
+                        </div>
+                      </th>
+                    ))}
+                  </thead>
+                  <tbody>
+                    {sortedData.map((row, rowIndex) => (
+                      <>
+                        <tr>
+                          {columns.map((col) => (
+                            <td
+                              className="text-right border p-2 border-grey-400"
+                              key={col.id}
+                            >
+                              {row[col.name]}
+                            </td>
+                          ))}
+                        </tr>
+                      </>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           )}
         </div>
