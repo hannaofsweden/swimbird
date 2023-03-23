@@ -96,40 +96,40 @@ export default function Page2() {
       </Head>
       <main>
         <div className="container mx-auto p-2">
-          {sortedData && (
-            <div>
-              {/* Mobile: list */}
-              <div className="md:hidden">
-                <div className="pb-2 flex justify-between items-center">
-                  <span className="text-2xl">Your accounts</span>
-                  {loadButton}
-                </div>
-                {data.map((row) => (
-                  <div
-                    key={row.id}
-                    className="border rounded-lg border-gray-400 p-4 mb-4 flex justify-between items-baseline"
-                  >
-                    <span className="text-lg font-medium">
-                      {row.accountId} ({row.bank})
-                    </span>
-                    <span>
-                      {row.balance} {row.currency}
-                    </span>
-                  </div>
-                ))}
+          <div>
+            {/* Mobile: list */}
+            <div className="md:hidden">
+              <div className="pb-2 flex justify-between items-center">
+                <span className="text-2xl">Your accounts</span>
+                {loadButton}
               </div>
-
-              {/* Desktop: table */}
-              <div className="hidden md:block">
-                <div className="pb-2 flex justify-between items-center">
-                  <span className="text-2xl">Your accounts</span>
-                  {loadButton}
+              {sortedData?.map((row) => (
+                <div
+                  key={row.id}
+                  className="border rounded-lg border-gray-400 p-4 mb-4 flex justify-between items-baseline"
+                >
+                  <span className="text-lg font-medium">
+                    {row.accountId} ({row.bank})
+                  </span>
+                  <span>
+                    {row.balance} {row.currency}
+                  </span>
                 </div>
-                <table className="w-full shadow-sm">
-                  <thead>
+              ))}
+            </div>
+
+            {/* Desktop: table */}
+            <div className="hidden md:block">
+              <div className="pb-2 flex justify-between items-center">
+                <span className="text-2xl">Your accounts</span>
+                {loadButton}
+              </div>
+              <table className="w-full shadow-sm">
+                <thead>
+                  <tr>
                     {columns.map((col) => (
                       <th
-                        key={col.id}
+                        key={col.name}
                         className="border border-gray-300 bg-gray-100 p-2 cursor-pointer"
                         onClick={handleColumnClick(col.name)}
                       >
@@ -145,27 +145,25 @@ export default function Page2() {
                         </div>
                       </th>
                     ))}
-                  </thead>
-                  <tbody>
-                    {sortedData.map((row, rowIndex) => (
-                      <>
-                        <tr>
-                          {columns.map((col) => (
-                            <td
-                              className="text-right border p-2 border-grey-400"
-                              key={col.id}
-                            >
-                              {row[col.name]}
-                            </td>
-                          ))}
-                        </tr>
-                      </>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sortedData?.map((row, rowIndex) => (
+                    <tr key={rowIndex}>
+                      {columns.map((col) => (
+                        <td
+                          key={col.name}
+                          className="text-right border p-2 border-grey-400"
+                        >
+                          {row[col.name]}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-          )}
+          </div>
         </div>
       </main>
     </>
