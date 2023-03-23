@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Frontend Task for Swimbird - page 1</title>
+        <title>Frontend Task for Swimbird - Page 1</title>
       </Head>
       <main>
         <div className="container mx-auto p-2">

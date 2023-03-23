@@ -92,7 +92,7 @@ export default function Page2() {
   return (
     <>
       <Head>
-        <title>Frontend Task for Swimbird - page 1</title>
+        <title>Frontend Task for Swimbird - Page 2</title>
       </Head>
       <main>
         <div className="container mx-auto p-2">
