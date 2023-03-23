@@ -44,7 +44,9 @@ export default function App({ Component, pageProps }) {
       <div className="border border-gray-200">
         <Component {...pageProps} />
       </div>
-      <div className="pt-8 text-gray-400 text-center">By Johanna Johansson</div>
+      <div className="pt-8 text-gray-400 text-center mb-20">
+        By Johanna Johansson
+      </div>
     </div>
   );
 }

@@ -96,47 +96,61 @@ export default function Page2() {
             </button>
           </div>
           {sortedData && (
-            //Mobile: list
-            <div className="md:hidden"></div>
-
-            //Desktop: table
-            <table className="hidden md:block w-full shadow-sm">
-              <thead>
-                {columns.map((col) => (
-                  <th
-                    key={col.id}
-                    className="border border-gray-300 bg-gray-100 p-2 cursor-pointer"
-                    onClick={handleColumnClick(col.name)}
-                  >
-                    <div className="flex items-top select-none">
-                      <span className="mr-1">{col.displayName}</span>
-                      <span className="w-4 relative -top-1">
-                        {sortColumn === col.name && sortOrder === "asc" && (
-                          <CaretDownOutlined />
-                        )}
-                        {sortColumn === col.name && sortOrder === "desc" && (
-                          <CaretUpOutlined />
-                        )}
-                      </span>
-                    </div>
-                  </th>
+            <div>
+              {/*Mobile: list*/}
+              <div className="md:hidden">
+                <div className="text-2xl pb-4 text-center">Accounts</div>
+                {data.map((row) => (
+                  <div className="border rounded-lg border-gray-400 p-4 mb-4 flex justify-between">
+                    <span>
+                      {row.accountId} in {row.bank}
+                    </span>
+                    <span>
+                      {row.balance} {row.currency}
+                    </span>
+                  </div>
                 ))}
-              </thead>
-              {sortedData.map((row, rowIndex) => (
-                <>
-                  <tr>
-                    {columns.map((col) => (
-                      <td
-                        className="text-right border p-2 border-grey-400"
-                        key={col.id}
-                      >
-                        {row[col.name]}
-                      </td>
-                    ))}
-                  </tr>
-                </>
-              ))}
-            </table>
+              </div>
+
+              {/*Desktop: table*/}
+              <table className="hidden md:table w-full shadow-sm">
+                <thead>
+                  {columns.map((col) => (
+                    <th
+                      key={col.id}
+                      className="border border-gray-300 bg-gray-100 p-2 cursor-pointer"
+                      onClick={handleColumnClick(col.name)}
+                    >
+                      <div className="flex items-top select-none">
+                        <span className="mr-1">{col.displayName}</span>
+                        <span className="w-4 relative -top-1">
+                          {sortColumn === col.name && sortOrder === "asc" && (
+                            <CaretDownOutlined />
+                          )}
+                          {sortColumn === col.name && sortOrder === "desc" && (
+                            <CaretUpOutlined />
+                          )}
+                        </span>
+                      </div>
+                    </th>
+                  ))}
+                </thead>
+                {sortedData.map((row, rowIndex) => (
+                  <>
+                    <tr>
+                      {columns.map((col) => (
+                        <td
+                          className="text-right border p-2 border-grey-400"
+                          key={col.id}
+                        >
+                          {row[col.name]}
+                        </td>
+                      ))}
+                    </tr>
+                  </>
+                ))}
+              </table>
+            </div>
           )}
         </div>
       </main>
