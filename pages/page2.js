@@ -137,10 +137,10 @@ export default function Page2() {
                           <span className="mr-1">{col.displayName}</span>
                           <span className="w-4 relative -top-1">
                             {sortColumn === col.name && sortOrder === "asc" && (
-                              <CaretDownOutlined />
+                              <CaretUpOutlined />
                             )}
                             {sortColumn === col.name &&
-                              sortOrder === "desc" && <CaretUpOutlined />}
+                              sortOrder === "desc" && <CaretDownOutlined />}
                           </span>
                         </div>
                       </th>
