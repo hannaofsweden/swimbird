@@ -25,3 +25,5 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - As for Tailwind, the long list of classes can be daunting at first, but you quickly get used to it.
 
 - SWR certainly makes the task of using backend endpoints very simple.
+
+- Since it's a small project with no external consumers of the components or functions created, I don't think there's a payoff in using TypeScript in this case.
